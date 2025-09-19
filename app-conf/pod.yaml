@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment
+  name: my-django
   labels:
-    app: my-pod
+    app: my-django
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: my-pod
+      app: my-django
   template:
     metadata:
       labels:
-        app: my-pod
+        app: my-django
     spec:
       containers:
         - name: my-container
@@ -23,11 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: my-django-svc
 spec:
   type: LoadBalancer
   selector:
-    app: my-pod
+    app: my-django
   ports:
     - protocol: TCP
       port: 8888
