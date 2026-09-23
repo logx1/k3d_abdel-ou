@@ -1,0 +1,28 @@
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: wil-app-deployment
+
+spec:
+    replicas: 3
+
+    selector:
+        matchLabels:
+            app: wil-app
+
+    template:
+        metadata:
+            labels:
+                app: wil-app
+        
+        spec:
+            containers:
+                - name: wil-app
+                  image: "hashicorp/http-echo:1.0"
+                  args:
+                    - "-listen=:8888"
+                    - "-text={\"status\":\"ok\",\"message\":\"v2\"}"
+                  ports:
+                    - containerPort: 8888
